@@ -12,12 +12,11 @@ const StartScreen = ({navigation}: RouterProps) => {
       <Container>
         <OnboardingCarousel />
         <Buttons>
-          <TouchableOpacity onPress={() => navigation.navigate('Registration')}>
+          <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
             <Button primary>Sign Up</Button>
           </TouchableOpacity>
           <Space />
-          <TouchableOpacity
-            onPress={() => navigation.navigate('Authorization')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
             <Button primary={false}>Login</Button>
           </TouchableOpacity>
         </Buttons>
@@ -31,7 +30,7 @@ const Buttons = styled.View`
 `;
 
 const Space = styled.View`
-  height: 16px;
+  margin-top: 16px;
 `;
 
 export default StartScreen;

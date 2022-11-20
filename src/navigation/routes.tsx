@@ -1,8 +1,9 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
 import StartScreen from '../screens/start-screen';
-import AuthorizationScreen from '../screens/authorization-screen';
-import RegistrationScreen from '../screens/registration-screen';
+import React from 'react';
+import SignUpScreen from '../screens/sign-up-screen';
+import LoginScreen from '../screens/login-screen';
 
 const Stack = createNativeStackNavigator();
 
@@ -16,14 +17,38 @@ export const Routes = () => {
           options={{headerShown: false}}
         />
         <Stack.Screen
-          name="Authorization"
-          component={AuthorizationScreen}
-          options={{headerShown: false}}
+          name="Login"
+          component={LoginScreen}
+          options={{
+            title: 'Login',
+            headerStyle: {
+              backgroundColor: '#fff',
+            },
+            headerTitleStyle: {
+              color: '#212325',
+              fontFamily: 'Inter-SemiBold',
+              fontSize: 18,
+            },
+            headerTitleAlign: 'center',
+            headerShadowVisible: false,
+          }}
         />
         <Stack.Screen
-          name="Registration"
-          component={RegistrationScreen}
-          options={{headerShown: false}}
+          name="SignUp"
+          component={SignUpScreen}
+          options={{
+            title: 'Sign Up',
+            headerStyle: {
+              backgroundColor: '#fff',
+            },
+            headerTitleStyle: {
+              color: '#212325',
+              fontFamily: 'Inter-SemiBold',
+              fontSize: 18,
+            },
+            headerTitleAlign: 'center',
+            headerShadowVisible: false,
+          }}
         />
       </Stack.Navigator>
     </NavigationContainer>

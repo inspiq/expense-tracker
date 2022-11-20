@@ -1,15 +1,15 @@
 export const mainStyles = {
   color: {
     dark25: '#7A7E80',
-    dark50: '#464A4D',
+    dark50: '#212325',
     dark75: '#161719',
     dark100: '#0D0E0F',
-    light20: '#E3E5E6',
+    light20: '#91919F',
     light40: '#F2F4F5',
-    light60: '#F7F9FA',
+    light60: '#F1F1FA',
     light80: '#FBFBFB',
     light100: '#FFFFFF',
-    violet20: '#EEE6FF',
+    violet20: '#EEE5FF',
     violet40: '#D3BDFF',
     violet60: '#B18AFF',
     violet80: '#8F57FF',
@@ -60,7 +60,8 @@ export const mainStyles = {
   },
   family: {
     interBold: 'Inter-Bold',
-    interMedium: 'Inter-Medium',
     interSemiBold: 'Inter-SemiBold',
+    interMedium: 'Inter-Medium',
+    interRegular: 'Inter-Regular',
   },
 };
