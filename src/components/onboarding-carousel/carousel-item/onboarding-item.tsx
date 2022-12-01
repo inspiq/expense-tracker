@@ -1,5 +1,5 @@
 import React from 'react';
-import { ImageRequireSource } from 'react-native';
+import {ImageRequireSource} from 'react-native';
 import {
   SlideImage,
   SlideItem,
@@ -19,7 +19,7 @@ interface CarouselItems {
 
 const OnboardingItem = ({item}: CarouselItems) => {
   return (
-    <SlideItem key={item.id}>
+    <SlideItem>
       <SlideImage source={item.src} />
       <SlideInfo>
         <SlideTitle>{item.title}</SlideTitle>

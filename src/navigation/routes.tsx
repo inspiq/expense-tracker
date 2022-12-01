@@ -1,56 +1,26 @@
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import {NavigationContainer} from '@react-navigation/native';
-import StartScreen from '../screens/start-screen';
-import React from 'react';
-import SignUpScreen from '../screens/sign-up-screen';
-import LoginScreen from '../screens/login-screen';
+import React, {useContext, useEffect, useState} from 'react';
+import {AuthStack} from './stacks/auth-stack';
+import {HomeStack} from './stacks/home-stack';
+import {AuthContext} from 'src/providers/auth-provider';
+import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 
-const Stack = createNativeStackNavigator();
+const RootNavigation = () => {
+  const {user, setUser} = useContext(AuthContext);
+  const [initializing, setInitializing] = useState(true);
 
-export const Routes = () => {
-  return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Start"
-          component={StartScreen}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen
-          name="Login"
-          component={LoginScreen}
-          options={{
-            title: 'Login',
-            headerStyle: {
-              backgroundColor: '#fff',
-            },
-            headerTitleStyle: {
-              color: '#212325',
-              fontFamily: 'Inter-SemiBold',
-              fontSize: 18,
-            },
-            headerTitleAlign: 'center',
-            headerShadowVisible: false,
-          }}
-        />
-        <Stack.Screen
-          name="SignUp"
-          component={SignUpScreen}
-          options={{
-            title: 'Sign Up',
-            headerStyle: {
-              backgroundColor: '#fff',
-            },
-            headerTitleStyle: {
-              color: '#212325',
-              fontFamily: 'Inter-SemiBold',
-              fontSize: 18,
-            },
-            headerTitleAlign: 'center',
-            headerShadowVisible: false,
-          }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+  const onAuthStateChanged = (user: FirebaseAuthTypes.User | null) => {
+    setUser(user);
+    if (initializing) setInitializing(false);
+  };
+
+  useEffect(() => {
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    return subscriber;
+  }, []);
+
+  if (initializing) return null;
+
+  return user ? <HomeStack /> : <AuthStack />;
 };
+
+export default RootNavigation;

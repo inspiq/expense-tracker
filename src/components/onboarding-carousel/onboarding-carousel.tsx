@@ -1,19 +1,21 @@
 import {ContentContainer, DotsPagination, Dot} from './styles';
-import carousel from '../../../assets/carousel';
+import carousel from 'assets/carousel';
 import OnboardingItem from './carousel-item/onboarding-item';
 import React, {useState} from 'react';
-import Container from '../container/container';
+import Container from 'src/components/container/container';
 import {NativeScrollEvent, NativeSyntheticEvent} from 'react-native';
 
 const OnboardingCarousel = () => {
-  const [active, setActive] = useState(0);
+  const [activeSlide, setActiveSlide] = useState(0);
 
-  const change = ({nativeEvent}: NativeSyntheticEvent<NativeScrollEvent>) => {
+  const handleScroll = ({
+    nativeEvent,
+  }: NativeSyntheticEvent<NativeScrollEvent>) => {
     const slide = Math.ceil(
       nativeEvent.contentOffset.x / nativeEvent.layoutMeasurement.width,
     );
-    if (slide !== active) {
-      setActive(slide);
+    if (slide !== activeSlide) {
+      setActiveSlide(slide);
     }
   };
 
@@ -22,17 +24,17 @@ const OnboardingCarousel = () => {
       <ContentContainer
         horizontal
         pagingEnabled
-        onScroll={change}
+        onScroll={handleScroll}
         showsHorizontalScrollIndicator={false}>
         {carousel.map(item => (
-          <Container>
+          <Container key={item.id}>
             <OnboardingItem item={item} />
           </Container>
         ))}
       </ContentContainer>
       <DotsPagination>
         {carousel.map((el, i) => (
-          <Dot key={i} i={i} active={active} />
+          <Dot key={el.id} i={i} activeSlide={activeSlide} />
         ))}
       </DotsPagination>
     </>

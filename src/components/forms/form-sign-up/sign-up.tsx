@@ -1,24 +1,35 @@
-import React, {useState} from 'react';
-import {Text, TouchableOpacity} from 'react-native';
+import React, {useContext, useState} from 'react';
+import {TouchableOpacity} from 'react-native';
 import styled from 'styled-components/native';
-import {RouterProps} from '../../../types/navigation';
-import {mainStyles} from '../../../variables/styles';
-import Button from '../../UI/button/button';
+import {RouterProps} from 'src/types/navigation';
+import {mainStyles} from 'src/variables/styles';
+import Button from 'src/components/UI/button/button';
 import {Formik} from 'formik';
-import {signUpSchema} from '../../../schema/index';
+import {signUpSchema} from 'src/schema/index';
 import {
   Tip,
   ButtonWrapper,
-  FormSignUp,
+  FormAuth,
   Link,
   MainInput,
   Question,
   Space,
   TextError,
-} from '../styles';
+  Show,
+  ShowIcon,
+  Password,
+} from 'src/components/forms/styles';
+import {AuthContext} from 'src/providers/auth-provider';
+
+interface SignUp {
+  email: string;
+  password: string;
+}
 
 const SignUp = ({navigation}: RouterProps) => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
+  const [isShowPassword, setIsShowPassword] = useState(true);
+  const {signup} = useContext(AuthContext);
 
   return (
     <Formik
@@ -27,7 +38,7 @@ const SignUp = ({navigation}: RouterProps) => {
       validateOnMount={true}
       validationSchema={signUpSchema}>
       {({handleChange, handleBlur, values, touched, errors, isValid}) => (
-        <FormSignUp>
+        <FormAuth>
           <MainInput
             onChangeText={handleChange('name')}
             onBlur={handleBlur('name')}
@@ -48,13 +59,19 @@ const SignUp = ({navigation}: RouterProps) => {
             <TextError>{errors.email}</TextError>
           )}
           <Space />
-          <MainInput
-            onChangeText={handleChange('password')}
-            onBlur={handleBlur('password')}
-            value={values.password}
-            placeholder="Password"
-            placeholderTextColor="#91919F"
-          />
+          <Password>
+            <MainInput
+              onChangeText={handleChange('password')}
+              onBlur={handleBlur('password')}
+              value={values.password}
+              placeholder="Password"
+              placeholderTextColor="#91919F"
+              secureTextEntry={isShowPassword}
+            />
+            <Show onPress={() => setIsShowPassword(!isShowPassword)}>
+              <ShowIcon source={require('assets/images/icons/show.png')} />
+            </Show>
+          </Password>
           {errors.password && touched.password && (
             <TextError>{errors.password}</TextError>
           )}
@@ -76,16 +93,16 @@ const SignUp = ({navigation}: RouterProps) => {
             </TitlePrivacyPolicy>
           </PrivacyPolicy>
           {toggleCheckBox ? (
-            <ButtonWrapper
-              disabled={!isValid}
-              onPress={() => navigation.navigate('Login')}>
-              <Button primary>Sign Up</Button>
+            <ButtonWrapper disabled={!isValid} onPress={() => signup(values)}>
+              <Button isPrimaryBackground={true} isPrimaryColor={true}>
+                Sign Up
+              </Button>
             </ButtonWrapper>
           ) : (
-            <ButtonWrapper
-              disabled
-              onPress={() => navigation.navigate('Login')}>
-              <Button primary>Sign Up</Button>
+            <ButtonWrapper disabled>
+              <Button isPrimaryBackground={true} isPrimaryColor={true}>
+                Sign Up
+              </Button>
             </ButtonWrapper>
           )}
           <Tip>
@@ -94,7 +111,7 @@ const SignUp = ({navigation}: RouterProps) => {
               <Link>Login</Link>
             </TouchableOpacity>
           </Tip>
-        </FormSignUp>
+        </FormAuth>
       )}
     </Formik>
   );

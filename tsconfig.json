@@ -4,6 +4,12 @@
   "compilerOptions": {
     "types": ["styled-components-react-native"],
     "skipLibCheck": true,                                 /* Skip type checking all .d.ts files. */
-    "strict": true
-  }
+    "strict": true,
+    "baseUrl": "./",
+    "paths": {
+      "src": ["./src"],
+      "assets": ["./assets"],
+      "*": ["./*"]
+    }
+  },
 }

@@ -1,10 +1,10 @@
 import {TouchableOpacity} from 'react-native';
-import Button from '../components/UI/button/button';
-import Container from '../components/container/container';
-import Wrapper from '../components/wrapper/wrapper';
-import {RouterProps} from '../types/navigation';
+import Button from 'src/components/UI/button/button';
+import Container from 'src/components/container/container';
+import Wrapper from 'src/components/wrapper/wrapper';
+import {RouterProps} from 'src/types/navigation';
 import styled from 'styled-components/native';
-import OnboardingCarousel from '../components/onboarding-carousel/onboarding-carousel';
+import OnboardingCarousel from 'src/components/onboarding-carousel/onboarding-carousel';
 
 const StartScreen = ({navigation}: RouterProps) => {
   return (
@@ -13,11 +13,15 @@ const StartScreen = ({navigation}: RouterProps) => {
         <OnboardingCarousel />
         <Buttons>
           <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-            <Button primary>Sign Up</Button>
+            <Button isPrimaryBackground isPrimaryColor={true}>
+              Sign Up
+            </Button>
           </TouchableOpacity>
           <Space />
           <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-            <Button primary={false}>Login</Button>
+            <Button isPrimaryColor={false} isPrimaryBackground={false}>
+              Login
+            </Button>
           </TouchableOpacity>
         </Buttons>
       </Container>

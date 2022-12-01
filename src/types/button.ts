@@ -1,3 +1,4 @@
 export interface ButtonType {
-  primary: boolean;
+  isPrimaryBackground: boolean;
+  isPrimaryColor: boolean;
 }

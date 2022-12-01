@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import {mainStyles} from '../../variables/styles';
+import {mainStyles} from 'src/variables/styles';
 
 export const Space = styled.View`
   margin-top: 24px;
@@ -45,9 +45,25 @@ export const TextError = styled.Text`
 `;
 
 export const ButtonWrapper = styled.TouchableOpacity`
-  margin: 35px 0;
+  margin: 35px 0 25px 0;
 `;
 
-export const FormSignUp = styled.View`
+export const FormAuth = styled.View`
   margin-top: 56px;
+`;
+
+export const Show = styled.TouchableOpacity`
+  position: absolute;
+  right: 16px;
+  top: 12px;
+  bottom: 12px;
+`;
+
+export const ShowIcon = styled.Image`
+  height: 32px;
+  width: 32px;
+`;
+
+export const Password = styled.View`
+  position: relative;
 `;

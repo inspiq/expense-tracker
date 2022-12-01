@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-import {mainStyles} from '../../variables/styles';
+import {mainStyles} from 'src/variables/styles';
 
 export const MainWrapper = styled.View`
   height: 100%;
