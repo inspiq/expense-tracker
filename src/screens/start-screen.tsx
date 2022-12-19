@@ -1,40 +1,44 @@
-import {TouchableOpacity} from 'react-native';
-import Button from 'src/components/UI/button/button';
-import Container from 'src/components/container/container';
-import Wrapper from 'src/components/wrapper/wrapper';
-import {RouterProps} from 'src/types/navigation';
+import {StatusBar, TouchableOpacity} from 'react-native';
+import {Router} from 'src/types/navigation';
 import styled from 'styled-components/native';
-import OnboardingCarousel from 'src/components/onboarding-carousel/onboarding-carousel';
+import {Container, Wrapper, OnboardingCarousel, Button} from 'src/components';
+import {mainStyles} from 'src/variables/styles';
 
-const StartScreen = ({navigation}: RouterProps) => {
+export const StartScreen = ({navigation}: Router) => {
   return (
-    <Wrapper>
-      <Container>
+    <>
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor={mainStyles.color.light100}
+      />
+      <Wrapper>
         <OnboardingCarousel />
-        <Buttons>
-          <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-            <Button isPrimaryBackground isPrimaryColor={true}>
-              Sign Up
-            </Button>
-          </TouchableOpacity>
-          <Space />
-          <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-            <Button isPrimaryColor={false} isPrimaryBackground={false}>
-              Login
-            </Button>
-          </TouchableOpacity>
-        </Buttons>
-      </Container>
-    </Wrapper>
+        <Container>
+          <Buttons>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('SignUp')}
+              activeOpacity={0.8}>
+              <Button isPrimaryBackground isPrimaryColor>
+                Sign Up
+              </Button>
+            </TouchableOpacity>
+            <Separator />
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Login')}
+              activeOpacity={0.8}>
+              <Button>Login</Button>
+            </TouchableOpacity>
+          </Buttons>
+        </Container>
+      </Wrapper>
+    </>
   );
 };
 
 const Buttons = styled.View`
-  margin: 35px 0 0 0;
+  margin: 35px 0;
 `;
 
-const Space = styled.View`
+const Separator = styled.View`
   margin-top: 16px;
 `;
-
-export default StartScreen;

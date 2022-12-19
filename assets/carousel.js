@@ -8,7 +8,8 @@ const Carousel = [
   {
     id: 2,
     title: 'Know where your money goes',
-    description: 'Track your transaction easily, with categories and financial report',
+    description:
+      'Track your transaction easily, with categories and financial report',
     src: require('./images/onboarding/onboarding2.png'),
   },
   {

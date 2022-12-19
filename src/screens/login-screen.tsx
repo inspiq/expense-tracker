@@ -1,17 +1,20 @@
-import React from 'react';
-import Container from 'src/components/container/container';
-import Login from 'src/components/forms/form-login/login';
-import Wrapper from 'src/components/wrapper/wrapper';
-import {RouterProps} from 'src/types/navigation';
+import {StatusBar} from 'react-native';
+import {Container, Wrapper, Login} from 'src/components';
+import {Router} from 'src/types/navigation';
+import {mainStyles} from 'src/variables/styles';
 
-const LoginScreen = ({navigation}: RouterProps) => {
+export const LoginScreen = ({navigation}: Router) => {
   return (
-    <Wrapper>
-      <Container>
-        <Login navigation={navigation} />
-      </Container>
-    </Wrapper>
+    <>
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor={mainStyles.color.light100}
+      />
+      <Wrapper>
+        <Container>
+          <Login navigation={navigation} />
+        </Container>
+      </Wrapper>
+    </>
   );
 };
-
-export default LoginScreen;

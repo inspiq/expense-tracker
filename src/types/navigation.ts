@@ -1,5 +1,6 @@
-import {NavigationProp} from '@react-navigation/native';
+import {NavigationProp, ParamListBase} from '@react-navigation/native';
+import {Screens} from 'src/navigation/routes';
 
-export interface RouterProps {
-  navigation: NavigationProp<any, any>;
+export interface Router {
+  navigation: NavigationProp<ParamListBase, Screens>;
 }

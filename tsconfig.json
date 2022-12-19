@@ -10,6 +10,16 @@
       "src": ["./src"],
       "assets": ["./assets"],
       "*": ["./*"]
-    }
+    },
+    "plugins": [
+      {
+        "name": "typescript-styled-plugin",
+        "lint": {
+          "validProperties": [
+            "tint-color"
+          ]
+        }
+      }
+    ]
   },
 }

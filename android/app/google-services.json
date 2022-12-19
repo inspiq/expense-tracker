@@ -7,18 +7,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:646897821710:android:74f4db8f198ffc6da6745f",
+        "mobilesdk_app_id": "1:646897821710:android:bbe637673c9857e7a6745f",
         "android_client_info": {
           "package_name": "com.expensetracker"
         }
       },
       "oauth_client": [
         {
-          "client_id": "646897821710-8r5a9u257tai2mq86lmt1542u7mjeirf.apps.googleusercontent.com",
+          "client_id": "646897821710-tjhq2mdfarsjhtcjo9plqgr759u1u4qn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.expensetracker",
-            "certificate_hash": "534d8db304e3992f58313a0fcd07c1e717da1813"
+            "certificate_hash": "8cd54ee442902adc6afd902d65537e76893d29eb"
           }
         },
         {

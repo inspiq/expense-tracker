@@ -1,11 +1,10 @@
 import {ContentContainer, DotsPagination, Dot} from './styles';
 import carousel from 'assets/carousel';
 import OnboardingItem from './carousel-item/onboarding-item';
-import React, {useState} from 'react';
-import Container from 'src/components/container/container';
+import {useState} from 'react';
 import {NativeScrollEvent, NativeSyntheticEvent} from 'react-native';
 
-const OnboardingCarousel = () => {
+export const OnboardingCarousel = () => {
   const [activeSlide, setActiveSlide] = useState(0);
 
   const handleScroll = ({
@@ -27,9 +26,7 @@ const OnboardingCarousel = () => {
         onScroll={handleScroll}
         showsHorizontalScrollIndicator={false}>
         {carousel.map(item => (
-          <Container key={item.id}>
-            <OnboardingItem item={item} />
-          </Container>
+          <OnboardingItem item={item} key={item.id} />
         ))}
       </ContentContainer>
       <DotsPagination>
@@ -40,5 +37,3 @@ const OnboardingCarousel = () => {
     </>
   );
 };
-
-export default OnboardingCarousel;

@@ -10,7 +10,6 @@ module.exports = {
           assets: './assets',
         },
       },
-      '@react-native-google-signin/google-signin',
     ],
   ],
 };

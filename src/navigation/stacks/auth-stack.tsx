@@ -1,50 +1,46 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
-import StartScreen from 'src/screens/start-screen';
-import React from 'react';
-import SignUpScreen from 'src/screens/sign-up-screen';
-import LoginScreen from 'src/screens/login-screen';
-import HomeScreen from 'src/screens/home-screen';
-import {defaultStyles} from './header-styles';
+import {defaultOptions} from './default-options';
+import {SignUpScreen, StartScreen, LoginScreen} from 'src/screens';
+import {Screens} from '../routes';
+import {BackButton} from 'src/components';
 
-const Stack = createNativeStackNavigator();
+const Auth = createNativeStackNavigator();
 
 export const AuthStack = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Start"
+      <Auth.Navigator initialRouteName={Screens.Start}>
+        <Auth.Screen
+          name={Screens.Start}
           component={StartScreen}
           options={{
             headerShown: false,
           }}
         />
-        <Stack.Screen
-          name="Login"
+        <Auth.Screen
+          name={Screens.Login}
           component={LoginScreen}
           options={{
             title: 'Login',
-            ...defaultStyles,
+            ...defaultOptions,
+            headerTitleAlign: 'center',
+            headerShadowVisible: false,
+            headerLeft: BackButton,
           }}
         />
-        <Stack.Screen
-          name="SignUp"
+        <Auth.Screen
+          name={Screens.SignUp}
           component={SignUpScreen}
           options={{
             title: 'Sign Up',
-            ...defaultStyles,
+            ...defaultOptions,
+            headerTitleAlign: 'center',
+            headerShadowVisible: false,
+            headerLeft: BackButton,
           }}
         />
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{
-            title: 'Home',
-            ...defaultStyles,
-          }}
-        />
-      </Stack.Navigator>
+      </Auth.Navigator>
     </NavigationContainer>
   );
 };

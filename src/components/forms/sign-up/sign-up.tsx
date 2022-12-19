@@ -1,9 +1,7 @@
-import React, {useContext, useState} from 'react';
+import {useState} from 'react';
 import {TouchableOpacity} from 'react-native';
-import styled from 'styled-components/native';
-import {RouterProps} from 'src/types/navigation';
-import {mainStyles} from 'src/variables/styles';
-import Button from 'src/components/UI/button/button';
+import {Router} from 'src/types/navigation';
+import {Button} from 'src/components';
 import {Formik} from 'formik';
 import {signUpSchema} from 'src/schema/index';
 import {
@@ -13,24 +11,28 @@ import {
   Link,
   MainInput,
   Question,
-  Space,
+  Separator,
   TextError,
   Show,
-  ShowIcon,
   Password,
 } from 'src/components/forms/styles';
-import {AuthContext} from 'src/providers/auth-provider';
+import {ShowPasswordIcon} from 'src/icons';
+import {useAuthContext} from 'src/context';
+import {mainStyles} from 'src/variables/styles';
+import {
+  Approval,
+  ApprovalEmpty,
+  Description,
+  DescriptionActive,
+  PrivacyPolicy,
+  TitlePrivacyPolicy,
+  СheckMark,
+} from './styles';
 
-interface SignUp {
-  email: string;
-  password: string;
-}
-
-const SignUp = ({navigation}: RouterProps) => {
+export const SignUp = ({navigation}: Router) => {
   const [toggleCheckBox, setToggleCheckBox] = useState(false);
   const [isShowPassword, setIsShowPassword] = useState(true);
-  const {signup} = useContext(AuthContext);
-
+  const {signup, errorSignup, user} = useAuthContext();
   return (
     <Formik
       initialValues={{email: '', password: '', name: ''}}
@@ -44,32 +46,35 @@ const SignUp = ({navigation}: RouterProps) => {
             onBlur={handleBlur('name')}
             value={values.name}
             placeholder="Name"
-            placeholderTextColor="#91919F"
+            placeholderTextColor={mainStyles.color.light20}
           />
           {errors.name && touched.name && <TextError>{errors.name}</TextError>}
-          <Space />
+          <Separator />
           <MainInput
             onChangeText={handleChange('email')}
             onBlur={handleBlur('email')}
             value={values.email}
             placeholder="Email"
-            placeholderTextColor="#91919F"
+            placeholderTextColor={mainStyles.color.light20}
           />
           {errors.email && touched.email && (
             <TextError>{errors.email}</TextError>
           )}
-          <Space />
+          {!user && errorSignup !== '' && <TextError>{errorSignup}</TextError>}
+          <Separator />
           <Password>
             <MainInput
               onChangeText={handleChange('password')}
               onBlur={handleBlur('password')}
               value={values.password}
               placeholder="Password"
-              placeholderTextColor="#91919F"
+              placeholderTextColor={mainStyles.color.light20}
               secureTextEntry={isShowPassword}
             />
-            <Show onPress={() => setIsShowPassword(!isShowPassword)}>
-              <ShowIcon source={require('assets/images/icons/show.png')} />
+            <Show
+              onPress={() => setIsShowPassword(!isShowPassword)}
+              activeOpacity={0.8}>
+              <ShowPasswordIcon />
             </Show>
           </Password>
           {errors.password && touched.password && (
@@ -77,29 +82,39 @@ const SignUp = ({navigation}: RouterProps) => {
           )}
           <PrivacyPolicy>
             {toggleCheckBox ? (
-              <Approval onPress={() => setToggleCheckBox(false)}>
+              <Approval
+                onPress={() => setToggleCheckBox(false)}
+                activeOpacity={0.8}>
                 <СheckMark>✓</СheckMark>
               </Approval>
             ) : (
-              <ApprovalEmpty onPress={() => setToggleCheckBox(true)} />
+              <ApprovalEmpty
+                onPress={() => setToggleCheckBox(true)}
+                activeOpacity={0.8}
+              />
             )}
             <TitlePrivacyPolicy>
               <Description>
                 By signing up, you agree to the{' '}
-                <DescriptionViolet>
+                <DescriptionActive>
                   Terms of Service and Privacy Policy
-                </DescriptionViolet>
+                </DescriptionActive>
               </Description>
             </TitlePrivacyPolicy>
           </PrivacyPolicy>
           {toggleCheckBox ? (
-            <ButtonWrapper disabled={!isValid} onPress={() => signup(values)}>
+            <ButtonWrapper
+              disabled={!isValid}
+              onPress={() => {
+                signup(values);
+              }}
+              activeOpacity={0.8}>
               <Button isPrimaryBackground={true} isPrimaryColor={true}>
                 Sign Up
               </Button>
             </ButtonWrapper>
           ) : (
-            <ButtonWrapper disabled>
+            <ButtonWrapper disabled activeOpacity={0.7}>
               <Button isPrimaryBackground={true} isPrimaryColor={true}>
                 Sign Up
               </Button>
@@ -107,7 +122,9 @@ const SignUp = ({navigation}: RouterProps) => {
           )}
           <Tip>
             <Question>Already have an account? </Question>
-            <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+            <TouchableOpacity
+              onPress={() => navigation.navigate('Login')}
+              activeOpacity={0.8}>
               <Link>Login</Link>
             </TouchableOpacity>
           </Tip>
@@ -116,60 +133,3 @@ const SignUp = ({navigation}: RouterProps) => {
     </Formik>
   );
 };
-
-const PrivacyPolicy = styled.View`
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  margin-top: 20px;
-  max-width: 296px;
-  width: 100%;
-`;
-
-const Approval = styled.TouchableOpacity`
-  width: 24px;
-  height: 24px;
-  border-radius: 5px;
-  margin-right: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: ${mainStyles.color.violet100};
-`;
-
-const ApprovalEmpty = styled.TouchableOpacity`
-  width: 24px;
-  height: 24px;
-  border: 2px solid ${mainStyles.color.violet100};
-  border-radius: 5px;
-  margin-right: 10px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const TitlePrivacyPolicy = styled.View`
-  display: flex;
-  flex-direction: row;
-`;
-
-const Description = styled.Text`
-  font-family: ${mainStyles.family.interMedium};
-  color: ${mainStyles.color.dark100};
-  font-size: ${mainStyles.size.regular3};
-  line-height: ${mainStyles.height.regular3height};
-`;
-
-const DescriptionViolet = styled.Text`
-  margin-left: 4px;
-  font-family: ${mainStyles.family.interMedium};
-  color: ${mainStyles.color.violet100};
-  font-size: ${mainStyles.size.regular3};
-`;
-
-const СheckMark = styled.Text`
-  color: ${mainStyles.color.light100};
-  font-size: ${mainStyles.size.regular3};
-`;
-
-export default SignUp;

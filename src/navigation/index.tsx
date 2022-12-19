@@ -1,11 +1,13 @@
-import React from 'react';
 import AuthProvider from 'src/providers/auth-provider';
-import Routes from './routes';
+import TabBarProvider from 'src/providers/tabbar-provider';
+import RootNavigation from './root';
 
 const Providers = () => {
   return (
     <AuthProvider>
-      <Routes />
+      <TabBarProvider>
+        <RootNavigation />
+      </TabBarProvider>
     </AuthProvider>
   );
 };

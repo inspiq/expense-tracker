@@ -1,11 +1,11 @@
-import React, {useContext, useEffect, useState} from 'react';
-import {AuthStack} from './stacks/auth-stack';
-import {HomeStack} from './stacks/home-stack';
-import {AuthContext} from 'src/providers/auth-provider';
+import {useEffect, useState} from 'react';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
+import {useAuthContext} from 'src/context';
+import {AuthStack, HomeStack} from './stacks';
 
 const RootNavigation = () => {
-  const {user, setUser} = useContext(AuthContext);
+  const {user, setUser} = useAuthContext();
+
   const [initializing, setInitializing] = useState(true);
 
   const onAuthStateChanged = (user: FirebaseAuthTypes.User | null) => {

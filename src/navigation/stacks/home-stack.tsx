@@ -1,32 +1,42 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {defaultOptions} from './default-options';
+import {ExpenseScreen, IncomeScreen} from 'src/screens';
 import {NavigationContainer} from '@react-navigation/native';
-import React from 'react';
-import HomeScreen from 'src/screens/home-screen';
+import {Screens} from '../routes';
+import TabComponent from '../tabbar/tabbar';
 
-const Stack = createNativeStackNavigator();
+const Home = createNativeStackNavigator();
 
 export const HomeStack = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
+      <Home.Navigator initialRouteName={Screens.Tab}>
+        <Home.Screen
+          name={Screens.Tab}
+          component={TabComponent}
+          options={{headerShown: false}}
+        />
+        <Home.Screen
+          name={Screens.Expense}
+          component={ExpenseScreen}
           options={{
-            title: 'Home',
-            headerStyle: {
-              backgroundColor: '#fff',
-            },
-            headerTitleStyle: {
-              color: '#212325',
-              fontFamily: 'Inter-SemiBold',
-              fontSize: 18,
-            },
+            title: 'Expense',
+            ...defaultOptions,
             headerTitleAlign: 'center',
             headerShadowVisible: false,
           }}
         />
-      </Stack.Navigator>
+        <Home.Screen
+          name={Screens.Income}
+          component={IncomeScreen}
+          options={{
+            title: 'Income',
+            ...defaultOptions,
+            headerTitleAlign: 'center',
+            headerShadowVisible: false,
+          }}
+        />
+      </Home.Navigator>
     </NavigationContainer>
   );
 };

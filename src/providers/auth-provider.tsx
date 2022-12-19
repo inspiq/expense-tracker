@@ -1,22 +1,26 @@
-import React, {createContext, useState} from 'react';
+import {createContext, useState} from 'react';
 import auth from '@react-native-firebase/auth';
-import {ChildrenType} from 'src/types/children';
+import {ChildrenProp} from 'src/types/children';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import firestore from '@react-native-firebase/firestore';
 
-interface ValuesProps {
+export interface ValuesProps {
+  name: string;
   email: string;
   password: string;
 }
 
 GoogleSignin.configure({
-  webClientId: '646897821710-s4up4l9pit8dpvr5j5ucteo4ehus8gga.apps.googleusercontent.com',
+  webClientId:
+    '646897821710-s4up4l9pit8dpvr5j5ucteo4ehus8gga.apps.googleusercontent.com',
 });
 
-export const AuthContext = createContext<any>({});
+export const AuthContext = createContext<Partial<any>>({});
 
-const AuthProvider = ({children}: ChildrenType) => {
+const AuthProvider = ({children}: ChildrenProp) => {
   const [user, setUser] = useState(null);
   const [errorLogin, setErrorLogin] = useState('');
+  const [errorSignup, setErrorSignup] = useState('');
 
   return (
     <AuthContext.Provider
@@ -24,6 +28,7 @@ const AuthProvider = ({children}: ChildrenType) => {
         user,
         setUser,
         errorLogin,
+        errorSignup,
         login: async (values: ValuesProps) => {
           try {
             await auth().signInWithEmailAndPassword(
@@ -43,8 +48,9 @@ const AuthProvider = ({children}: ChildrenType) => {
               values.email,
               values.password,
             );
+            setErrorSignup('');
           } catch (e) {
-            console.log(e);
+            setErrorSignup('This mail is already in use');
           }
         },
         loginGoogle: async () => {

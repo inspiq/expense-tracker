@@ -1,16 +1,22 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import {MainButton, TextButton} from './styles';
-import {ChildrenType} from 'src/types/children';
-import {ButtonType} from 'src/types/button';
+import {ChildrenProp} from 'src/types/children';
 
-type Props = ChildrenType & ButtonType;
+interface ButtonProps {
+  isPrimaryBackground?: boolean;
+  isPrimaryColor?: boolean;
+}
 
-const Button: FC<Props> = ({children, isPrimaryBackground, isPrimaryColor}) => {
+type Props = ChildrenProp & ButtonProps;
+
+export const Button: FC<Props> = ({
+  children,
+  isPrimaryBackground,
+  isPrimaryColor,
+}) => {
   return (
     <MainButton isPrimaryBackground={isPrimaryBackground}>
       <TextButton isPrimaryColor={isPrimaryColor}>{children}</TextButton>
     </MainButton>
   );
 };
-
-export default Button;

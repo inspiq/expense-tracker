@@ -1,25 +1,32 @@
-import React, {useContext} from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
-import Container from 'src/components/container/container';
-import Button from 'src/components/UI/button/button';
-import Wrapper from 'src/components/wrapper/wrapper';
-import {AuthContext} from 'src/providers/auth-provider';
+import {StatusBar} from 'react-native';
+import {
+  Container,
+  Wrapper,
+  SpendFrequency,
+  RecentTransaction,
+} from 'src/components';
+import {mainStyles} from 'src/variables/styles';
+import styled from 'styled-components/native';
 
-const HomeScreen = () => {
-  const {user, logout} = useContext(AuthContext);
-
+export const HomeScreen = () => {
   return (
-    <Wrapper>
-      <Container>
-        <View>
-          <Text>Welcome {user.uid}</Text>
-        </View>
-        <TouchableOpacity onPress={logout}>
-          <Button isPrimaryBackground={true} isPrimaryColor={true}>Logout</Button>
-        </TouchableOpacity>
-      </Container>
-    </Wrapper>
+    <>
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor={mainStyles.color.beige}
+      />
+      <Wrapper>
+        <Container>
+          <Separator>
+            <SpendFrequency />
+            <RecentTransaction />
+          </Separator>
+        </Container>
+      </Wrapper>
+    </>
   );
 };
 
-export default HomeScreen;
+const Separator = styled.View`
+  margin: 261px 0px 88px 0px;
+`;

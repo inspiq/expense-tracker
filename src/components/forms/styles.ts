@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import {mainStyles} from 'src/variables/styles';
 
-export const Space = styled.View`
+export const Separator = styled.View`
   margin-top: 24px;
 `;
 
@@ -11,8 +11,8 @@ export const MainInput = styled.TextInput`
   background: ${mainStyles.color.light100};
   padding: 12px 16px;
   color: ${mainStyles.color.light20};
-  font-weight: ${mainStyles.family.interRegular};
-  font-size: ${mainStyles.size.regular1};
+  font-family: ${mainStyles.family.interRegular};
+  font-size: ${mainStyles.size.regular1}px;
 `;
 
 export const Tip = styled.View`
@@ -21,26 +21,26 @@ export const Tip = styled.View`
   flex-direction: row;
   font-family: ${mainStyles.family.interMedium};
   color: ${mainStyles.color.light20};
-  font-size: ${mainStyles.size.regular1};
+  font-size: ${mainStyles.size.regular1}px;
 `;
 
 export const Question = styled.Text`
   font-family: ${mainStyles.family.interMedium};
   color: ${mainStyles.color.light20};
-  font-size: ${mainStyles.size.regular1};
+  font-size: ${mainStyles.size.regular1}px;
 `;
 
 export const Link = styled.Text`
   font-family: ${mainStyles.family.interMedium};
   color: ${mainStyles.color.violet100};
-  font-size: ${mainStyles.size.regular1};
+  font-size: ${mainStyles.size.regular1}px;
   text-decoration: underline;
 `;
 
 export const TextError = styled.Text`
   font-family: ${mainStyles.family.interMedium};
   color: ${mainStyles.color.red80};
-  font-size: ${mainStyles.size.regular3};
+  font-size: ${mainStyles.size.regular2}px;
   margin-top: 5px;
 `;
 
@@ -54,14 +54,8 @@ export const FormAuth = styled.View`
 
 export const Show = styled.TouchableOpacity`
   position: absolute;
-  right: 16px;
-  top: 12px;
-  bottom: 12px;
-`;
-
-export const ShowIcon = styled.Image`
-  height: 32px;
-  width: 32px;
+  right: 15px;
+  top: 11px;
 `;
 
 export const Password = styled.View`
